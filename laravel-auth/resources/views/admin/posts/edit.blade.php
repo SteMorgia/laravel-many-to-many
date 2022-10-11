@@ -11,6 +11,13 @@
 
             <h1 class="mb-4">Edit post</h1>
 
+            <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" id="category_id">
+                <option {{(old('category_id')=="")?'selected':''}} value="">Nessuna categoria</option>
+                @foreach ($categories as $category)
+                    <option {{(old('category_id', $post->category_id)==$category->id)?'selected':''}} value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+
             <div class="form-group mb-3">
                 <label for="title">Title</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" required id="title" name="title" max="255" value="{{old('title', $post->title)}}">
